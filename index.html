@@ -58,16 +58,16 @@
   }
 
   * { box-sizing: border-box; }
-  html { -webkit-text-size-adjust: 100%; }
+  html { -webkit-text-size-adjust: 100%; font-size: 17px; scroll-behavior: smooth; }
   body {
     margin: 0;
     background: var(--paper);
     color: var(--ink);
     font-family: "Segoe UI", ui-sans-serif, system-ui, -apple-system, Roboto, sans-serif;
-    font-size: 16px;
-    line-height: 1.55;
+    line-height: 1.62;
     -webkit-font-smoothing: antialiased;
   }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
   .mono {
     font-family: ui-monospace, Consolas, "Cascadia Mono", "Cascadia Code", "SFMono-Regular", Menlo, monospace;
     font-variant-numeric: tabular-nums;
@@ -80,11 +80,21 @@
   ::selection { background: var(--accent-soft); }
 
   .wrap {
-    max-width: 1040px;
+    max-width: 1180px;
     margin: 0 auto;
     padding: 0 clamp(20px, 5vw, 40px);
   }
   .prose { max-width: 640px; }
+
+  /* ---------- scroll progress ---------- */
+  .scroll-progress { position: fixed; top: 0; left: 0; width: 100%; height: 3px; background: var(--line); z-index: 1000; }
+  .scroll-progress-bar { height: 100%; width: 0%; background: var(--accent); }
+  @media (prefers-reduced-motion: no-preference) { .scroll-progress-bar { transition: width 0.08s linear; } }
+
+  /* ---------- scroll reveal ---------- */
+  .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.in-view { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
 
   /* ---------- top bar ---------- */
   .topbar {
@@ -113,9 +123,48 @@
     transition: color 0.15s ease, border-color 0.15s ease;
   }
   .topbar nav a:hover { color: var(--ink); border-color: var(--line); }
+  .nav-toggle {
+    display: none; background: none; border: 1px solid var(--line); border-radius: 4px;
+    color: var(--ink); font-size: 1rem; line-height: 1; padding: 7px 11px; cursor: pointer;
+  }
+  .nav-toggle:hover { border-color: var(--accent); }
+  @media (max-width: 700px) {
+    .nav-toggle { display: inline-flex; }
+    .topbar { position: relative; }
+    .topbar nav {
+      display: none; position: absolute; top: 100%; left: 0; right: 0;
+      flex-direction: column; gap: 16px; background: var(--paper);
+      border-bottom: 1px solid var(--line); padding: 20px clamp(20px, 5vw, 40px) 24px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.12); z-index: 900;
+    }
+    .topbar nav.open { display: flex; }
+  }
 
   /* ---------- hero ---------- */
   .hero { padding: clamp(48px, 9vw, 96px) 0 clamp(40px, 7vw, 72px); }
+  .hero-grid { display: grid; grid-template-columns: 1fr; gap: 40px; align-items: center; }
+  @media (min-width: 900px) { .hero-grid { grid-template-columns: 1.6fr 1fr; gap: 56px; } }
+  .hero-photo { display: flex; justify-content: center; order: -1; }
+  @media (min-width: 900px) { .hero-photo { order: 0; } }
+  .avatar-frame {
+    width: 200px; text-align: center; background: var(--paper-raised);
+    border: 1px solid var(--line); border-radius: 10px; padding: 22px; box-shadow: var(--shadow);
+  }
+  .avatar-tag {
+    font-family: ui-monospace, Consolas, monospace; font-size: 0.66rem; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--ink-dim); display: block; margin-bottom: 16px;
+  }
+  .avatar-initials {
+    width: 110px; height: 110px; margin: 0 auto 14px; border-radius: 50%;
+    background: var(--accent-soft); border: 2px solid var(--accent);
+    display: flex; align-items: center; justify-content: center;
+    font-family: ui-monospace, Consolas, monospace; font-weight: 700; font-size: 2rem; color: var(--accent);
+  }
+  .avatar-photo {
+    width: 110px; height: 110px; margin: 0 auto 14px; border-radius: 50%;
+    border: 2px solid var(--accent); object-fit: cover; display: block;
+  }
+  .avatar-sub { font-family: ui-monospace, Consolas, monospace; font-size: 0.7rem; color: var(--ink-dim); display: block; }
   .status-tag {
     display: inline-flex;
     align-items: center;
@@ -189,6 +238,9 @@
     font-weight: 600;
   }
   .btn.primary:hover { opacity: 0.92; }
+  .btn-arrow { display: inline-block; transition: transform 0.15s ease; }
+  .btn:hover .btn-arrow { transform: translateX(3px); }
+  .btn:hover .icon-flip { display: inline-block; transform: rotate(-10deg); }
 
   .stat-strip {
     display: grid;
@@ -217,6 +269,9 @@
     margin-top: 4px;
     display: block;
   }
+  .stat-icon { font-size: 1.05rem; display: block; margin-bottom: 6px; }
+  .stat { transition: transform 0.15s ease, background 0.15s ease; }
+  .stat:hover { transform: translateY(-3px); }
   @media (max-width: 640px) { .stat-strip { grid-template-columns: repeat(2, 1fr); } }
 
   /* ---------- sections ---------- */
@@ -251,6 +306,31 @@
   @media (max-width: 800px) { .about-grid { grid-template-columns: 1fr; } }
   .about-grid p { color: var(--ink-dim); margin: 0 0 16px; }
   .about-grid p:last-child { margin-bottom: 0; }
+  .sub-eyebrow {
+    font-family: ui-monospace, Consolas, monospace; font-size: 0.72rem; letter-spacing: 0.06em;
+    text-transform: uppercase; color: var(--ink-dim); display: block; margin: 26px 0 12px;
+  }
+  .sub-eyebrow:first-child { margin-top: 0; }
+  .check-list { list-style: none; margin: 0 0 8px; padding: 0; display: grid; gap: 9px; }
+  .check-list li { position: relative; padding-left: 24px; color: var(--ink); }
+  .check-list li::before { content: "✓"; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
+
+  /* ---------- process ---------- */
+  .process-flow { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; }
+  .process-step {
+    display: flex; align-items: center; gap: 10px; background: var(--paper-raised);
+    border: 1px solid var(--line); border-radius: 6px; padding: 14px 18px;
+    transition: transform 0.15s ease;
+  }
+  .process-step:hover { transform: translateY(-3px); }
+  .process-step .step-num { color: var(--accent); font-weight: 700; font-size: 0.75rem; }
+  .process-step .step-label { font-size: 0.92rem; font-weight: 600; }
+  .process-arrow { color: var(--ink-dim); font-size: 1rem; }
+  @media (max-width: 700px) {
+    .process-flow { flex-direction: column; align-items: stretch; }
+    .process-step { width: 100%; }
+    .process-arrow { transform: rotate(90deg); margin-left: 20px; }
+  }
 
   .coverage { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
   @media (max-width: 520px) { .coverage { grid-template-columns: 1fr; } }
@@ -305,9 +385,9 @@
     font-size: 0.9rem; color: var(--ink-dim); margin-bottom: 14px;
   }
   .dates { font-family: ui-monospace, Consolas, monospace; font-size: 0.82rem; }
-  .entry ul { margin: 0; padding-left: 18px; color: var(--ink-dim); }
-  .entry li { margin-bottom: 8px; }
-  .entry li:last-child { margin-bottom: 0; }
+  .entry ul { margin: 0; padding: 0; color: var(--ink-dim); list-style: none; display: grid; gap: 9px; }
+  .entry li { position: relative; padding-left: 24px; margin-bottom: 0; }
+  .entry li::before { content: "✓"; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
   .entry li b { color: var(--ink); font-weight: 600; }
   .edu {
     margin-top: 34px; padding-top: 24px; border-top: 1px dashed var(--line);
@@ -321,13 +401,16 @@
     display: grid; grid-template-columns: 1fr auto; gap: 20px;
     background: var(--paper-raised); border: 1px solid var(--line); border-radius: 8px;
     padding: 28px 30px; margin-bottom: 18px;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
   }
+  .project-featured:hover, .card:hover { transform: translateY(-4px); box-shadow: 0 10px 24px rgba(0,0,0,0.14); }
   @media (max-width: 640px) { .project-featured { grid-template-columns: 1fr; } }
   .proj-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
   @media (max-width: 680px) { .proj-grid { grid-template-columns: 1fr; } }
   .card {
     background: var(--paper-raised); border: 1px solid var(--line); border-radius: 8px;
     padding: 24px 26px; display: flex; flex-direction: column;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
   }
   .proj-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 10px; }
   .proj-name { font-family: ui-monospace, Consolas, monospace; font-weight: 700; font-size: 1.02rem; }
@@ -336,6 +419,11 @@
     color: var(--accent); background: var(--accent-soft);
     border-radius: 3px; padding: 3px 8px; white-space: nowrap;
   }
+  .proj-shot {
+    background: var(--paper); border: 1px solid var(--line); border-radius: 6px;
+    padding: 10px; margin-bottom: 14px;
+  }
+  .proj-shot img { width: 100%; height: auto; display: block; border-radius: 3px; }
   .proj-desc { color: var(--ink-dim); font-size: 0.92rem; margin: 0 0 16px; flex-grow: 1; }
   .proj-foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
   .stack-tags { display: flex; flex-wrap: wrap; gap: 6px; }
@@ -345,9 +433,30 @@
     white-space: nowrap;
   }
   .src-link:hover { text-decoration: underline; }
+  .src-link .btn-arrow { display: inline-block; transition: transform 0.15s ease; }
+  .src-link:hover .btn-arrow { transform: translateX(3px); }
+
+  /* ---------- impact ---------- */
+  .impact-list {
+    list-style: none; margin: 0; padding: 0;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 14px 32px;
+  }
+  @media (max-width: 700px) { .impact-list { grid-template-columns: 1fr; } }
+  .impact-list li {
+    position: relative; padding: 14px 18px 14px 44px;
+    background: var(--paper-raised); border: 1px solid var(--line); border-radius: 6px;
+    font-size: 0.95rem; font-weight: 600;
+    transition: transform 0.15s ease;
+  }
+  .impact-list li:hover { transform: translateY(-3px); }
+  .impact-list li::before {
+    content: "✓"; position: absolute; left: 16px; top: 50%; transform: translateY(-50%);
+    color: var(--accent); font-weight: 700; font-size: 1.05rem;
+  }
 
   /* ---------- footer / contact ---------- */
   footer { padding: clamp(48px, 8vw, 84px) 0 48px; border-top: 1px solid var(--line); }
+  .contact-tagline { font-size: 1.1rem; font-weight: 600; margin: -8px 0 28px; }
   .contact-grid {
     display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 28px;
   }
@@ -366,12 +475,16 @@
 </style>
 </head>
 <body>
+<div class="scroll-progress"><div class="scroll-progress-bar" id="scrollBar"></div></div>
 <div class="topbar">
   <div class="brand"><strong>Krishna Mohan B</strong> — QA Engineer</div>
-  <nav>
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+  <nav id="siteNav">
     <a href="#about">About</a>
+    <a href="#process">Process</a>
     <a href="#experience">Experience</a>
     <a href="#projects">Projects</a>
+    <a href="#impact">Impact</a>
     <a href="#contact">Contact</a>
   </nav>
 </div>
@@ -379,79 +492,117 @@
 <div class="wrap">
 
   <section class="hero" style="border-top:none;">
-    <span class="status-tag"><span class="status-dot"></span>QA_REPORT // STATUS: VERIFIED</span>
-    <h1 class="headline">I test whether AI tells the truth<span class="cursor"></span></h1>
-    <p class="hero-sub">QA Engineer with <b>5 years</b> across AI/LLM evaluation, computer-vision testing, and automation — building golden datasets, scoring hallucination rate, and turning "looks right" into evidence.</p>
-    <div class="cta-row">
-      <a class="btn primary" href="https://github.com/mohank1234" target="_blank" rel="noopener">View GitHub →</a>
-      <a class="btn" href="https://linkedin.com/in/krishna-batthini" target="_blank" rel="noopener">LinkedIn</a>
-      <a class="btn" id="resume-link" href="Krishna_Mohan_B_Resume.pdf" download="Krishna_Mohan_B_Resume.pdf">Download Résumé (PDF)</a>
-      <a class="btn" href="mailto:krishnam.qaengineer@gmail.com">Email</a>
-    </div>
-    <div class="stat-strip">
-      <div class="stat"><span class="num mono">5 yrs</span><span class="label">QA, spanning AI &amp; automation</span></div>
-      <div class="stat"><span class="num mono">1000+</span><span class="label">Cameras validated (CV testing)</span></div>
-      <div class="stat"><span class="num mono">120-Q</span><span class="label">RAG benchmark dataset shipped</span></div>
-      <div class="stat"><span class="num mono">4</span><span class="label">Insurance AI agents graded</span></div>
+    <div class="hero-grid">
+      <div>
+        <span class="status-tag"><span class="status-dot"></span>QA_REPORT // STATUS: VERIFIED</span>
+        <h1 class="headline">I test whether AI tells the truth<span class="cursor"></span></h1>
+        <p class="hero-sub">QA Engineer with <b>5 years</b> across AI/LLM evaluation, computer-vision testing, and automation — building golden datasets, scoring hallucination rate, and turning "looks right" into evidence.</p>
+        <div class="cta-row">
+          <a class="btn primary" id="resume-link" href="Krishna_Mohan_B_Resume.pdf" download="Krishna_Mohan_B_Resume.pdf">📄 Download Résumé</a>
+          <a class="btn" href="https://github.com/mohank1234" target="_blank" rel="noopener"><span class="icon-flip">🐙</span> GitHub <span class="btn-arrow">→</span></a>
+          <a class="btn" href="https://linkedin.com/in/krishna-batthini" target="_blank" rel="noopener">💼 LinkedIn <span class="btn-arrow">→</span></a>
+          <a class="btn" href="mailto:krishnam.qaengineer@gmail.com">✉️ Email <span class="btn-arrow">→</span></a>
+        </div>
+        <div class="stat-strip">
+          <div class="stat"><span class="stat-icon">🕒</span><span class="num mono">5 yrs</span><span class="label">QA, spanning AI &amp; automation</span></div>
+          <div class="stat"><span class="stat-icon">📷</span><span class="num mono">1000+</span><span class="label">Cameras validated (CV testing)</span></div>
+          <div class="stat"><span class="stat-icon">📊</span><span class="num mono">120-Q</span><span class="label">RAG benchmark dataset shipped</span></div>
+          <div class="stat"><span class="stat-icon">🤖</span><span class="num mono">4</span><span class="label">Insurance AI agents graded</span></div>
+        </div>
+      </div>
+      <div class="hero-photo">
+        <div class="avatar-frame">
+          <span class="avatar-tag">Operator</span>
+          <img class="avatar-photo" src="headshot.jpg" alt="Krishna Mohan B">
+          <span class="avatar-sub">role: qa_engineer</span>
+        </div>
+      </div>
     </div>
   </section>
 
-  <section id="about">
+  <section id="about" class="reveal">
     <div class="section-head">
       <div><span class="eyebrow">01 — Coverage</span><h2 class="section-title">About &amp; skills</h2></div>
       <div class="section-note">What's actually under test, grouped the way I'd group it in a test plan.</div>
     </div>
     <div class="about-grid">
       <div class="prose">
-        <p>I build the benchmark ("golden") datasets that decide whether an AI agent's answer counts as correct — then score precision, recall, and hallucination rate against them across multiple production agents.</p>
-        <p>Alongside that: computer-vision validation on a 1000+ camera monitoring network, conversational-AI/voice-bot testing on Microsoft Bot Framework, and the automation frameworks (Selenium, working knowledge of Playwright) that keep regression suites honest.</p>
-        <p>I've owned an automation framework from zero in a startup, and mentored junior QA engineers on both.</p>
+        <span class="sub-eyebrow">Who I am</span>
+        <p>I build the benchmark ("golden") datasets that decide whether an AI agent's answer counts as correct — then score precision, recall, and hallucination rate against them across multiple production agents. I've owned an automation framework from zero in a startup, and mentored junior QA engineers along the way.</p>
+        <span class="sub-eyebrow">What I specialize in</span>
+        <ul class="check-list">
+          <li>AI / LLM &amp; agent testing</li>
+          <li>RAG evaluation &amp; hallucination scoring</li>
+          <li>Computer-vision testing</li>
+          <li>Conversational AI / voice-bot testing</li>
+          <li>API &amp; automation testing</li>
+        </ul>
       </div>
       <div class="coverage">
         <div class="coverage-item">
           <span class="cat">AI / LLM &amp; agent testing</span>
           <div class="tag-row">
             <span class="tag">Golden datasets</span><span class="tag">Precision / recall</span>
-            <span class="tag">Hallucination rate</span><span class="tag">Promptfoo</span><span class="tag">DeepEval</span>
+            <span class="tag">Hallucination rate</span><span class="tag">🤖 Promptfoo</span><span class="tag">🧠 DeepEval</span>
           </div>
         </div>
         <div class="coverage-item">
           <span class="cat">Computer vision</span>
           <div class="tag-row">
-            <span class="tag">Camera / event detection</span><span class="tag">OCR test assets</span>
+            <span class="tag">📷 Camera / event detection</span><span class="tag">🔎 OCR test assets</span>
           </div>
         </div>
         <div class="coverage-item">
           <span class="cat">Conversational AI</span>
           <div class="tag-row">
-            <span class="tag">Microsoft Bot Framework</span><span class="tag">Intent recognition</span><span class="tag">NLP / STT</span>
+            <span class="tag">🤖 Microsoft Bot Framework</span><span class="tag">Intent recognition</span><span class="tag">🎙 NLP / STT</span>
           </div>
         </div>
         <div class="coverage-item">
           <span class="cat">Automation</span>
           <div class="tag-row">
-            <span class="tag">Selenium WebDriver</span><span class="tag">Playwright</span><span class="tag">TestNG</span><span class="tag">Hybrid POM</span>
+            <span class="tag">🧭 Selenium WebDriver</span><span class="tag">🎭 Playwright</span><span class="tag">✅ TestNG</span><span class="tag">🧩 Hybrid POM</span>
           </div>
         </div>
         <div class="coverage-item">
           <span class="cat">API &amp; database</span>
           <div class="tag-row">
-            <span class="tag">Postman</span><span class="tag">Rest Assured</span><span class="tag">SQL</span>
+            <span class="tag">📬 Postman</span><span class="tag">🔗 Rest Assured</span><span class="tag">🗄 SQL</span>
           </div>
         </div>
         <div class="coverage-item">
           <span class="cat">Process</span>
           <div class="tag-row">
-            <span class="tag">Agile / Scrum</span><span class="tag">JIRA</span><span class="tag">CI/CD</span><span class="tag">Docker</span><span class="tag">Mentoring</span>
+            <span class="tag">🔁 Agile / Scrum</span><span class="tag">📌 JIRA</span><span class="tag">⚙ CI/CD</span><span class="tag">🐳 Docker</span><span class="tag">🧑‍🏫 Mentoring</span>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="experience">
+  <section id="process" class="reveal">
     <div class="section-head">
-      <div><span class="eyebrow">02 — Log</span><h2 class="section-title">Experience</h2></div>
+      <div><span class="eyebrow">02 — Method</span><h2 class="section-title">How I test AI</h2></div>
+      <div class="section-note">The pipeline behind every benchmark and bug report.</div>
+    </div>
+    <div class="process-flow">
+      <div class="process-step"><span class="step-num mono">01</span><span class="step-label">Requirements</span></div>
+      <span class="process-arrow mono">→</span>
+      <div class="process-step"><span class="step-num mono">02</span><span class="step-label">Golden Dataset</span></div>
+      <span class="process-arrow mono">→</span>
+      <div class="process-step"><span class="step-num mono">03</span><span class="step-label">Evaluation</span></div>
+      <span class="process-arrow mono">→</span>
+      <div class="process-step"><span class="step-num mono">04</span><span class="step-label">Bug Reports</span></div>
+      <span class="process-arrow mono">→</span>
+      <div class="process-step"><span class="step-num mono">05</span><span class="step-label">Regression</span></div>
+      <span class="process-arrow mono">→</span>
+      <div class="process-step"><span class="step-num mono">06</span><span class="step-label">Release</span></div>
+    </div>
+  </section>
+
+  <section id="experience" class="reveal">
+    <div class="section-head">
+      <div><span class="eyebrow">03 — Log</span><h2 class="section-title">Experience</h2></div>
       <div class="section-note">Most recent first.</div>
     </div>
     <div class="timeline">
@@ -462,11 +613,12 @@
         </div>
         <div class="company-line">Masterworks — Nabeh AI Division · <span class="dates">Feb 2026 – Present</span></div>
         <ul>
-          <li>Build <b>benchmark ("golden") datasets</b> and evaluate AI agent responses for accuracy, hallucination, and grounding across multiple insurance AI agents — precision, recall, and hallucination-rate metrics via Promptfoo and DeepEval.</li>
-          <li>Test a <b>conversational AI / voice bot</b> on Microsoft Bot Framework — intent recognition, response validation, NLP/speech-to-text.</li>
-          <li>Built and maintain an <b>open-source AI test-generation agent</b> producing test plans, scenarios, and cases with pass/fail dashboards; extending it to execute against live applications and auto-generate structured bug reports.</li>
-          <li>Develop automated API test scripts (Postman, RestAssured); run functional, regression, and UAT testing across Agile sprints.</li>
-          <li>Document QA findings and status reports for engineering and product stakeholders.</li>
+          <li>Built <b>120+ benchmark ("golden") dataset questions</b> to evaluate AI agent accuracy, hallucination, and grounding.</li>
+          <li>Score <b>precision, recall, and hallucination-rate</b> metrics via Promptfoo &amp; DeepEval across multiple insurance AI agents.</li>
+          <li>Test a <b>conversational AI / voice bot</b> on Microsoft Bot Framework — intent recognition, NLP, and speech-to-text.</li>
+          <li>Built and maintain an <b>open-source AI test-generation agent</b> — test plans, scenarios, cases, and pass/fail dashboards.</li>
+          <li>Extending that agent to execute against live applications and auto-generate structured bug reports.</li>
+          <li>Develop automated API tests (Postman, RestAssured) across Agile sprints; document QA findings for stakeholders.</li>
         </ul>
       </div>
       <div class="entry">
@@ -475,11 +627,12 @@
         </div>
         <div class="company-line">ZestIoT Technologies Pvt. Ltd. · <span class="dates">Nov 2021 – Feb 2026</span></div>
         <ul>
-          <li>Performed <b>computer-vision testing</b> for AI-powered monitoring systems — camera and event-detection validation across a network of 1000+ cameras on a microservices/Docker architecture, plus vision/OCR test-asset design.</li>
-          <li>Built and owned a <b>Selenium WebDriver automation framework</b> (hybrid POM + data-driven) from the ground up in a startup environment; working knowledge of Playwright.</li>
-          <li>Developed automated API tests (Postman, Rest Assured); performed backend SQL validation and root-cause analysis on data-integrity defects.</li>
+          <li>Validated <b>1000+ cameras</b> for AI-powered monitoring — event detection across a microservices/Docker architecture.</li>
+          <li>Designed <b>vision / OCR test assets</b> for computer-vision QA.</li>
+          <li>Built and owned a <b>Selenium WebDriver automation framework</b> (hybrid POM + data-driven) from the ground up; working knowledge of Playwright.</li>
+          <li>Developed automated API tests (Postman, Rest Assured); performed backend <b>SQL validation</b> and root-cause analysis.</li>
           <li>Executed functional, regression, integration, and UAT testing across release cycles.</li>
-          <li>Mentored junior QA engineers on automation framework usage, testing best practices, and bug reporting.</li>
+          <li>Mentored junior QA engineers on automation, testing best practices, and bug reporting.</li>
         </ul>
       </div>
       <div class="edu">
@@ -492,9 +645,9 @@
     </div>
   </section>
 
-  <section id="projects">
+  <section id="projects" class="reveal">
     <div class="section-head">
-      <div><span class="eyebrow">03 — Evidence</span><h2 class="section-title">Projects</h2></div>
+      <div><span class="eyebrow">04 — Evidence</span><h2 class="section-title">Projects</h2></div>
       <div class="section-note">Public repos — source linked, not just claimed.</div>
     </div>
 
@@ -512,12 +665,13 @@
         </div>
       </div>
       <div style="display:flex; align-items:flex-end;">
-        <a class="src-link" href="https://github.com/mohank1234/QA-Agent" target="_blank" rel="noopener">View source →</a>
+        <a class="src-link" href="https://github.com/mohank1234/QA-Agent" target="_blank" rel="noopener">View source <span class="btn-arrow">→</span></a>
       </div>
     </div>
 
     <div class="proj-grid">
       <div class="card">
+        <div class="proj-shot"><img src="project-promtfoo.png" alt="Promtfoo_Playwright evaluation pipeline: load dataset, login, create chat, ask agent, parse stream, grade answer, export report" loading="lazy"></div>
         <div class="proj-top">
           <span class="proj-name">Promtfoo_Playwright</span>
           <span class="badge">RAG eval</span>
@@ -525,7 +679,7 @@
         <p class="proj-desc">A Promptfoo-based benchmark framework for multi-agent RAG chat APIs: logs in, opens a chat, asks a benchmark question, parses the streamed response, and grades it semantically against an expected reference. Ships self-contained with a mock multi-agent API and a 120-question sample dataset.</p>
         <div class="proj-foot">
           <div class="stack-tags"><span class="stack-tag">JavaScript</span><span class="stack-tag">·</span><span class="stack-tag">Promptfoo</span></div>
-          <a class="src-link" href="https://github.com/mohank1234/Promtfoo_Playwright" target="_blank" rel="noopener">Source →</a>
+          <a class="src-link" href="https://github.com/mohank1234/Promtfoo_Playwright" target="_blank" rel="noopener">Source <span class="btn-arrow">→</span></a>
         </div>
       </div>
       <div class="card">
@@ -536,7 +690,7 @@
         <p class="proj-desc">Excel-driven API test automation — write test cases in a spreadsheet, run them via Newman, and get HTML (htmlextra), Allure, and colour-coded Excel Pass/Fail reports out the other end.</p>
         <div class="proj-foot">
           <div class="stack-tags"><span class="stack-tag">Node.js</span><span class="stack-tag">·</span><span class="stack-tag">Newman</span></div>
-          <a class="src-link" href="https://github.com/mohank1234/API-Automator-XLS" target="_blank" rel="noopener">Source →</a>
+          <a class="src-link" href="https://github.com/mohank1234/API-Automator-XLS" target="_blank" rel="noopener">Source <span class="btn-arrow">→</span></a>
         </div>
       </div>
       <div class="card">
@@ -547,22 +701,38 @@
         <p class="proj-desc">Java-based automation utility for keeping a Naukri.com job profile up to date without manual upkeep.</p>
         <div class="proj-foot">
           <div class="stack-tags"><span class="stack-tag">Java</span></div>
-          <a class="src-link" href="https://github.com/mohank1234/Naukri-Profile_Automation" target="_blank" rel="noopener">Source →</a>
+          <a class="src-link" href="https://github.com/mohank1234/Naukri-Profile_Automation" target="_blank" rel="noopener">Source <span class="btn-arrow">→</span></a>
         </div>
       </div>
     </div>
   </section>
 
-  <footer id="contact">
+  <section id="impact" class="reveal">
     <div class="section-head">
-      <div><span class="eyebrow">04 — Contact</span><h2 class="section-title">Get in touch</h2></div>
+      <div><span class="eyebrow">05 — Impact</span><h2 class="section-title">What I deliver</h2></div>
+      <div class="section-note">Outcomes, not adjectives.</div>
     </div>
+    <ul class="impact-list">
+      <li>5+ years of QA experience</li>
+      <li>120+ AI benchmark questions created</li>
+      <li>1000+ computer-vision cameras validated</li>
+      <li>AI/RAG evaluation using Promptfoo &amp; DeepEval</li>
+      <li>API automation using Postman, Newman &amp; RestAssured</li>
+      <li>Functional, regression, API &amp; AI testing</li>
+    </ul>
+  </section>
+
+  <footer id="contact" class="reveal">
+    <div class="section-head">
+      <div><span class="eyebrow">06 — Contact</span><h2 class="section-title">Get in touch</h2></div>
+    </div>
+    <p class="contact-tagline">Let's build reliable AI together.</p>
     <div class="contact-grid">
       <div class="contact-list">
-        <a href="mailto:krishnam.qaengineer@gmail.com"><span class="k">Email</span> krishnam.qaengineer@gmail.com</a>
-        <a href="https://linkedin.com/in/krishna-batthini" target="_blank" rel="noopener"><span class="k">LinkedIn</span> linkedin.com/in/krishna-batthini</a>
-        <a href="https://github.com/mohank1234" target="_blank" rel="noopener"><span class="k">GitHub</span> github.com/mohank1234</a>
-        <a href="#" id="resume-link-2" download="Krishna_Mohan_B_Resume.pdf"><span class="k">Résumé</span> Download PDF</a>
+        <a href="mailto:krishnam.qaengineer@gmail.com">📧 <span class="k">Email</span> krishnam.qaengineer@gmail.com</a>
+        <a href="https://linkedin.com/in/krishna-batthini" target="_blank" rel="noopener">💼 <span class="k">LinkedIn</span> linkedin.com/in/krishna-batthini</a>
+        <a href="https://github.com/mohank1234" target="_blank" rel="noopener">🐙 <span class="k">GitHub</span> github.com/mohank1234</a>
+        <a href="Krishna_Mohan_B_Resume.pdf" id="resume-link-2" download="Krishna_Mohan_B_Resume.pdf">📄 <span class="k">Résumé</span> Download PDF</a>
       </div>
       <div class="sign-off">
         <div class="mono">assert candidate.status == "OPEN_TO_ROLES"</div>
@@ -572,5 +742,50 @@
   </footer>
 
 </div>
+<script>
+(function(){
+  var toggle = document.getElementById('navToggle');
+  var nav = document.getElementById('siteNav');
+  toggle.addEventListener('click', function(){
+    var open = nav.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  nav.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){
+      nav.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+})();
+(function(){
+  var bar = document.getElementById('scrollBar');
+  function updateBar(){
+    var h = document.documentElement;
+    var scrollable = h.scrollHeight - h.clientHeight;
+    var pct = scrollable > 0 ? (h.scrollTop / scrollable) * 100 : 0;
+    bar.style.width = pct + '%';
+  }
+  window.addEventListener('scroll', updateBar, { passive: true });
+  window.addEventListener('resize', updateBar);
+  updateBar();
+})();
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var els = document.querySelectorAll('.reveal');
+  if (reduce || !('IntersectionObserver' in window)) {
+    els.forEach(function(el){ el.classList.add('in-view'); });
+    return;
+  }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  els.forEach(function(el){ io.observe(el); });
+})();
+</script>
 </body>
 </html>
