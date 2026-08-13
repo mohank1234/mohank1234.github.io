@@ -3,8 +3,53 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Senior QA Engineer with 5 years of experience in Manual Testing, API Testing, Automation, and AI/LLM application testing.">
-<title>Krishna Mohan B — Senior QA Engineer, AI/LLM Test Engineer</title>
+<meta name="description" content="Senior QA Engineer (5+ yrs) specializing in AI/LLM &amp; RAG evaluation, computer-vision testing, and automation. 1000+ cameras validated, 120+ AI benchmark cases built. Based in Hyderabad, open to remote.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://mohank1234.github.io/">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta name="theme-color" content="#256B54" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#4FAE8D" media="(prefers-color-scheme: dark)">
+<title>Krishna Mohan B — Senior QA Engineer &amp; AI/LLM Test Engineer</title>
+
+<!-- Open Graph -->
+<meta property="og:type" content="profile">
+<meta property="og:site_name" content="Krishna Mohan B — Portfolio">
+<meta property="og:url" content="https://mohank1234.github.io/">
+<meta property="og:title" content="Krishna Mohan B — Senior QA Engineer &amp; AI/LLM Test Engineer">
+<meta property="og:description" content="5+ years in Manual, API, Automation &amp; AI/LLM testing. 1000+ cameras validated, 120+ AI benchmark cases built. RAG evaluation, computer-vision QA, and test automation.">
+<meta property="og:image" content="https://mohank1234.github.io/og-preview.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Krishna Mohan B — Senior QA Engineer, AI/LLM Test Engineer">
+<meta property="og:locale" content="en_US">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Krishna Mohan B — Senior QA Engineer &amp; AI/LLM Test Engineer">
+<meta name="twitter:description" content="5+ years in Manual, API, Automation &amp; AI/LLM testing. 1000+ cameras validated, 120+ AI benchmark cases built.">
+<meta name="twitter:image" content="https://mohank1234.github.io/og-preview.png">
+<meta name="twitter:image:alt" content="Krishna Mohan B — Senior QA Engineer, AI/LLM Test Engineer">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Krishna Mohan B",
+  "url": "https://mohank1234.github.io/",
+  "jobTitle": "Senior QA Engineer / AI-LLM Test Engineer",
+  "description": "Senior QA Engineer with 5+ years of experience in Manual Testing, API Testing, Automation, and AI/LLM application testing.",
+  "address": { "@type": "PostalAddress", "addressLocality": "Hyderabad", "addressCountry": "IN" },
+  "sameAs": [
+    "https://linkedin.com/in/krishna-batthini",
+    "https://github.com/mohank1234"
+  ],
+  "knowsAbout": [
+    "AI/LLM Testing", "RAG Evaluation", "Computer Vision Testing", "API Testing",
+    "Test Automation", "Selenium", "Playwright", "Promptfoo", "DeepEval"
+  ]
+}
+</script>
+
 <style>
   :root {
     --paper: #EEF0EA;
@@ -79,6 +124,19 @@
   }
   ::selection { background: var(--accent-soft); }
 
+  .sr-only {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+  }
+  .skip-link {
+    position: absolute; left: 12px; top: -60px;
+    background: var(--accent); color: var(--accent-ink);
+    padding: 10px 16px; border-radius: 4px; font-size: 0.85rem; font-weight: 600;
+    text-decoration: none; z-index: 1100;
+    transition: top 0.15s ease;
+  }
+  .skip-link:focus { top: 12px; }
+
   .wrap {
     max-width: 1180px;
     margin: 0 auto;
@@ -128,7 +186,7 @@
     color: var(--ink); font-size: 1rem; line-height: 1; padding: 7px 11px; cursor: pointer;
   }
   .nav-toggle:hover { border-color: var(--accent); }
-  @media (max-width: 700px) {
+  @media (max-width: 860px) {
     .nav-toggle { display: inline-flex; }
     .topbar { position: relative; }
     .topbar nav {
@@ -148,15 +206,36 @@
   @media (min-width: 900px) { .hero-photo { order: 0; } }
 
   .profile-card {
+    position: relative;
     width: 220px; min-height: 250px;
     display: flex; flex-direction: column; align-items: center; justify-content: center;
     text-align: center; gap: 8px;
     background: var(--paper-raised); border: 1px solid var(--line); border-radius: 10px;
     padding: 24px 20px; box-shadow: var(--shadow);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
+  .profile-card:hover { transform: translateY(-3px); box-shadow: 0 12px 26px rgba(0,0,0,0.14); }
+  .profile-photo-wrap { position: relative; width: 92px; height: 92px; margin: 0 auto 6px; }
   .profile-photo {
-    width: 92px; height: 92px; margin: 0 auto 6px; border-radius: 50%;
+    width: 92px; height: 92px; border-radius: 50%;
     border: 2px solid var(--accent); object-fit: cover; display: block;
+    box-shadow: 0 0 0 4px var(--accent-soft);
+  }
+  .status-dot {
+    position: absolute; right: 2px; bottom: 2px;
+    width: 15px; height: 15px; border-radius: 50%;
+    background: var(--accent); border: 2px solid var(--paper-raised);
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .status-dot::after {
+      content: ""; position: absolute; inset: 0; border-radius: 50%;
+      background: var(--accent); opacity: 0.6;
+      animation: pulse-dot 2.2s ease-out infinite;
+    }
+  }
+  @keyframes pulse-dot {
+    0% { transform: scale(1); opacity: 0.55; }
+    100% { transform: scale(2.2); opacity: 0; }
   }
   .profile-name { font-size: 1.05rem; font-weight: 700; color: var(--ink); }
   .profile-roles { display: flex; flex-direction: column; gap: 6px; margin-top: 4px; width: 100%; }
@@ -173,6 +252,12 @@
   }
   .recruiter-badge .dot { color: var(--line); }
 
+  .hero-kicker {
+    font-family: ui-monospace, Consolas, "Cascadia Mono", monospace;
+    font-size: 0.85rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--ink-dim); margin: 0 0 10px;
+  }
+
   h1.headline {
     font-family: ui-monospace, Consolas, "Cascadia Mono", "Cascadia Code", "SFMono-Regular", Menlo, monospace;
     font-weight: 700;
@@ -180,17 +265,25 @@
     line-height: 1.16;
     letter-spacing: -0.01em;
     text-wrap: balance;
-    margin: 0 0 18px;
+    margin: 0 0 8px;
     max-width: 20ch;
   }
 
-  .hero-sub {
-    font-size: clamp(1.03rem, 2vw, 1.16rem);
-    color: var(--ink-dim);
-    max-width: 60ch;
+  .hero-spec {
+    font-family: ui-monospace, Consolas, "Cascadia Mono", monospace;
+    font-size: clamp(0.95rem, 1.6vw, 1.1rem);
+    font-weight: 600;
+    color: var(--accent);
     margin: 0 0 18px;
   }
-  .hero-sub b { color: var(--ink); font-weight: 600; }
+
+  .hero-lines { max-width: 58ch; margin: 0 0 18px; }
+  .hero-lines p {
+    font-size: clamp(1rem, 1.9vw, 1.09rem);
+    color: var(--ink-dim);
+    margin: 0 0 6px;
+  }
+  .hero-lines b { color: var(--ink); font-weight: 600; }
 
   .cta-row { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 30px; }
   .btn {
@@ -198,9 +291,13 @@
     font-size: 0.85rem; letter-spacing: 0.02em;
     text-decoration: none;
     padding: 11px 18px;
+    min-height: 44px;
     border-radius: 4px;
     border: 1px solid var(--line);
     color: var(--ink);
+    background: transparent;
+    font-family: inherit;
+    cursor: pointer;
     transition: border-color 0.15s ease, background 0.15s ease, transform 0.1s ease;
   }
   .btn:hover { border-color: var(--accent); transform: translateY(-1px); }
@@ -295,6 +392,12 @@
     border-radius: 6px;
     padding: 16px 18px;
     height: 100%;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+  }
+  .coverage-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 22px rgba(0,0,0,0.12);
+    border-color: var(--accent);
   }
   .coverage-item .cat {
     font-family: ui-monospace, Consolas, monospace;
@@ -310,24 +413,37 @@
     font-size: 0.76rem;
     background: var(--neutral-pill);
     color: var(--ink);
-    border-radius: 3px;
-    padding: 4px 8px;
+    border-radius: 4px;
+    padding: 5px 9px;
     line-height: 1.2;
+    display: inline-block;
+    transition: transform 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+  }
+  .tag:hover {
+    background: var(--accent-soft);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   }
 
   /* ---------- process ---------- */
   .process-flow { display: flex; flex-wrap: wrap; align-items: stretch; gap: 12px; }
   .process-step {
     display: flex; flex-direction: column; align-items: flex-start; justify-content: center;
-    gap: 4px; flex: 1 1 160px; min-height: 82px;
+    gap: 4px; flex: 1 1 160px; min-height: 90px;
     background: var(--paper-raised);
     border: 1px solid var(--line); border-radius: 6px; padding: 14px 16px;
-    transition: transform 0.15s ease;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
   }
-  .process-step:hover { transform: translateY(-3px); }
+  .process-step:hover { transform: translateY(-3px); box-shadow: 0 10px 22px rgba(0,0,0,0.12); border-color: var(--accent); }
+  .process-step .step-top { display: flex; align-items: center; gap: 8px; }
+  .process-step .step-icon {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 22px; height: 22px; border-radius: 50%;
+    background: var(--accent-soft); font-size: 0.78rem; flex-shrink: 0;
+  }
   .process-step .step-num { color: var(--accent); font-weight: 700; font-size: 0.72rem; }
   .process-step .step-label { font-size: 0.9rem; font-weight: 600; margin-top: 2px; }
-  .process-step .step-sub { font-size: 0.68rem; color: var(--ink-dim); }
+  .process-step .step-sub { font-size: 0.7rem; color: var(--ink-dim); line-height: 1.4; }
   .process-arrow { color: var(--ink-dim); font-size: 1rem; display: flex; align-items: center; }
   @media (max-width: 700px) {
     .process-flow { flex-direction: column; align-items: stretch; }
@@ -337,7 +453,7 @@
 
   /* ---------- experience ---------- */
   .timeline { position: relative; }
-  .entry { position: relative; padding: 0 0 40px 32px; border-left: 1px solid var(--line); }
+  .entry { position: relative; padding: 0 0 44px 32px; border-left: 1px solid var(--line); }
   .entry:last-child { padding-bottom: 0; }
   .entry::before {
     content: "";
@@ -401,6 +517,19 @@
   }
   .proj-shot img { width: 100%; height: auto; display: block; border-radius: 3px; }
   .proj-desc { color: var(--ink-dim); font-size: 0.92rem; margin: 0 0 16px; flex-grow: 1; }
+
+  .case-grid { display: grid; gap: 8px 20px; margin: 0 0 14px; }
+  @media (min-width: 640px) { .case-grid.two-col { grid-template-columns: 1fr 1fr; } }
+  .case-row { font-size: 0.88rem; line-height: 1.55; }
+  .case-row .case-label {
+    font-family: ui-monospace, Consolas, monospace; font-size: 0.68rem; letter-spacing: 0.05em;
+    text-transform: uppercase; color: var(--ink-dim); display: block; margin-bottom: 3px;
+  }
+  .case-row .case-value { color: var(--ink); }
+  .achieve-list { list-style: none; margin: 0 0 16px; padding: 0; display: grid; gap: 7px; }
+  .achieve-list li { position: relative; padding-left: 22px; color: var(--ink-dim); font-size: 0.88rem; line-height: 1.5; }
+  .achieve-list li::before { content: "✓"; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
+  .achieve-list li b { color: var(--ink); font-weight: 600; }
   .proj-foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-top: auto; }
   .stack-tags { display: flex; flex-wrap: wrap; gap: 6px; }
   .stack-tag { font-size: 0.72rem; color: var(--ink-dim); font-family: ui-monospace, Consolas, monospace; }
@@ -413,6 +542,24 @@
   .src-link:hover .btn-arrow { transform: translateX(3px); }
 
   /* ---------- achievements ---------- */
+  .kpi-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+    margin-bottom: 24px;
+  }
+  @media (max-width: 640px) { .kpi-grid { grid-template-columns: 1fr; } }
+  .kpi-card {
+    background: var(--paper-raised); border: 1px solid var(--line); border-radius: 8px;
+    padding: 22px 20px; text-align: left;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+  }
+  .kpi-card:hover { transform: translateY(-3px); box-shadow: 0 10px 22px rgba(0,0,0,0.12); border-color: var(--accent); }
+  .kpi-card .kpi-icon { font-size: 1.15rem; display: block; margin-bottom: 8px; }
+  .kpi-card .kpi-num {
+    font-family: ui-monospace, Consolas, monospace; font-weight: 700;
+    font-size: clamp(1.6rem, 3.2vw, 2rem); color: var(--accent); display: block;
+  }
+  .kpi-card .kpi-label { font-size: 0.82rem; color: var(--ink-dim); margin-top: 4px; display: block; }
+
   .impact-list {
     list-style: none; margin: 0; padding: 0;
     display: grid; grid-template-columns: 1fr 1fr; gap: 14px 32px;
@@ -449,14 +596,23 @@
   .sign-off { font-size: 0.85rem; color: var(--ink-dim); text-align: right; }
   .sign-off .sign-name { color: var(--ink); font-weight: 600; }
   @media (max-width: 640px) { .contact-grid { flex-direction: column; align-items: flex-start; } .sign-off { text-align: left; } }
+
+  .copy-feedback {
+    font-size: 0.76rem; color: var(--accent); font-weight: 600;
+    opacity: 0; transition: opacity 0.2s ease; margin-left: 4px;
+  }
+  .copy-feedback.show { opacity: 1; }
+  .back-to-top-row { margin-top: 34px; padding-top: 22px; border-top: 1px dashed var(--line); }
+  .back-to-top { font-size: 0.8rem; }
 </style>
 </head>
 <body>
+<a href="#main" class="skip-link">Skip to content</a>
 <div class="scroll-progress"><div class="scroll-progress-bar" id="scrollBar"></div></div>
-<div class="topbar">
+<header class="topbar" id="top">
   <div class="brand"><strong>Krishna Mohan B</strong> — Senior QA Engineer</div>
-  <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
-  <nav id="siteNav">
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="siteNav">☰</button>
+  <nav id="siteNav" aria-label="Primary">
     <a href="#about">About</a>
     <a href="#skills">Skills</a>
     <a href="#experience">Experience</a>
@@ -464,35 +620,46 @@
     <a href="#achievements">Achievements</a>
     <a href="#contact">Contact</a>
   </nav>
-</div>
+</header>
 
-<div class="wrap">
+<main class="wrap" id="main">
 
   <section class="hero" style="border-top:none;">
     <div class="hero-grid">
       <div>
-        <h1 class="headline">SR QA Engineer • AI/LLM Test Engineer</h1>
-        <p class="hero-sub">Senior QA Engineer with <b>5 years</b> of experience in Manual Testing, API Testing, Automation, and AI/LLM application testing. Experienced in validating enterprise web applications, RAG-based AI systems, APIs, and computer vision solutions while building scalable automation frameworks and high-quality test strategies.</p>
+        <p class="hero-kicker">Krishna Mohan B</p>
+        <h1 class="headline">Senior QA Engineer</h1>
+        <p class="hero-spec">AI / LLM Test Engineer · RAG, Vision &amp; API Quality</p>
+        <div class="hero-lines">
+          <p>I validate <b>AI/LLM, RAG, and computer-vision systems</b> for production reliability.</p>
+          <p>5 years validating <b>1,000+ camera/AI use cases</b> and building <b>120+ benchmark datasets</b> for accuracy &amp; hallucination scoring.</p>
+          <p>I build <b>automation frameworks</b> (Playwright, Selenium, API) that catch regressions before release.</p>
+        </div>
         <div class="recruiter-badge">
           <span>📍 Hyderabad</span><span class="dot">•</span><span>Immediate Joiner</span><span class="dot">•</span><span>Open to Remote / Hybrid</span>
         </div>
         <div class="cta-row">
-          <a class="btn primary" id="resume-link" href="Krishna_Mohan_B_Resume.pdf" download="Krishna_Mohan_B_Resume.pdf">📄 Download Resume</a>
-          <a class="btn" href="https://linkedin.com/in/krishna-batthini" target="_blank" rel="noopener">💼 LinkedIn <span class="btn-arrow">→</span></a>
-          <a class="btn" href="https://github.com/mohank1234" target="_blank" rel="noopener"><span class="icon-flip">🐙</span> GitHub <span class="btn-arrow">→</span></a>
-          <a class="btn" href="mailto:krishnam.qaengineer@gmail.com">✉️ Email <span class="btn-arrow">→</span></a>
+          <a class="btn primary" id="resume-link" href="Krishna_Mohan_B_Resume.pdf" download="Krishna_Mohan_B_Resume.pdf"><span aria-hidden="true">📄</span> Download Resume</a>
+          <a class="btn" href="#projects"><span aria-hidden="true">🗂</span> View Projects <span class="btn-arrow" aria-hidden="true">→</span></a>
+          <a class="btn" href="https://linkedin.com/in/krishna-batthini" target="_blank" rel="noopener"><span aria-hidden="true">💼</span> LinkedIn <span class="btn-arrow" aria-hidden="true">→</span></a>
+          <a class="btn" href="https://github.com/mohank1234" target="_blank" rel="noopener"><span class="icon-flip" aria-hidden="true">🐙</span> GitHub <span class="btn-arrow" aria-hidden="true">→</span></a>
+          <a class="btn" href="mailto:krishnam.qaengineer@gmail.com"><span aria-hidden="true">✉️</span> Email <span class="btn-arrow" aria-hidden="true">→</span></a>
         </div>
         <div class="stat-strip">
-          <div class="stat"><span class="stat-icon">🕒</span><span class="num mono">05</span><span class="label">Years Experience</span></div>
-          <div class="stat"><span class="stat-icon">📷</span><span class="num mono">1000+</span><span class="label">Cameras Validated</span></div>
-          <div class="stat"><span class="stat-icon">📊</span><span class="num mono">120+</span><span class="label">AI Benchmark Cases</span></div>
-          <div class="stat"><span class="stat-icon">🤖</span><span class="num mono">03</span><span class="label">AI Projects</span></div>
+          <div class="stat"><span class="stat-icon" aria-hidden="true">🕒</span><span class="num mono"><span data-count-to="5">0</span>+</span><span class="label">Years Experience</span></div>
+          <div class="stat"><span class="stat-icon" aria-hidden="true">📷</span><span class="num mono"><span data-count-to="1000">0</span>+</span><span class="label">Cameras Validated</span></div>
+          <div class="stat"><span class="stat-icon" aria-hidden="true">📊</span><span class="num mono"><span data-count-to="120">0</span>+</span><span class="label">AI Benchmark Cases</span></div>
+          <div class="stat"><span class="stat-icon" aria-hidden="true">🤖</span><span class="num mono"><span data-count-to="3">0</span></span><span class="label">AI Projects</span></div>
         </div>
       </div>
       <div class="hero-photo">
         <div class="profile-card">
-          <img class="profile-photo" src="headshot.jpg" alt="Krishna Mohan B">
+          <div class="profile-photo-wrap">
+            <img class="profile-photo" src="headshot.jpg" alt="Portrait of Krishna Mohan B" width="92" height="92" fetchpriority="high" decoding="async">
+            <span class="status-dot" aria-hidden="true"></span>
+          </div>
           <div class="profile-name">Krishna Mohan B</div>
+          <span class="sr-only">Available for new opportunities</span>
           <div class="profile-roles">
             <span class="profile-role-tag">Senior QA Engineer</span>
             <span class="profile-role-tag">AI/LLM Test Engineer</span>
@@ -509,7 +676,7 @@
       <div class="section-note">A quick summary of experience and core focus areas.</div>
     </div>
     <div class="prose" style="max-width:760px;">
-      <p>I ensure software quality through comprehensive manual testing, API validation, automation, and AI application testing. My experience spans enterprise web applications, APIs, AI/LLM systems, RAG solutions, and computer vision platforms, with a strong focus on building scalable test frameworks, improving release quality, and delivering reliable, production-ready software through effective quality engineering practices.</p>
+      <p>I validate software quality across manual, API, and automation testing — with a deep focus on <b>AI/LLM, RAG, and computer-vision systems</b>. I build scalable test frameworks and quality-engineering practices that catch issues before release, not after.</p>
       <span class="sub-eyebrow">Core focus areas</span>
       <ul class="check-list">
         <li>AI / LLM &amp; agent testing</li>
@@ -517,6 +684,7 @@
         <li>Computer-vision testing</li>
         <li>Conversational AI / voice-bot testing</li>
         <li>API &amp; automation testing</li>
+        <li>Quality engineering &amp; release strategy</li>
       </ul>
     </div>
   </section>
@@ -530,8 +698,8 @@
       <div class="coverage-item">
         <span class="cat">AI / LLM &amp; agent testing</span>
         <div class="tag-row">
-          <span class="tag">Golden datasets</span><span class="tag">Precision / recall</span>
-          <span class="tag">Hallucination rate</span><span class="tag">🤖 Promptfoo</span><span class="tag">🧠 DeepEval</span>
+          <span class="tag">🗂 Golden datasets</span><span class="tag">📈 Precision / recall</span>
+          <span class="tag">⚠️ Hallucination rate</span><span class="tag">🤖 Promptfoo</span><span class="tag">🧠 DeepEval</span>
         </div>
       </div>
       <div class="coverage-item">
@@ -543,7 +711,7 @@
       <div class="coverage-item">
         <span class="cat">Conversational AI</span>
         <div class="tag-row">
-          <span class="tag">🤖 Microsoft Bot Framework</span><span class="tag">Intent recognition</span><span class="tag">🎙 NLP / STT</span>
+          <span class="tag">🤖 Microsoft Bot Framework</span><span class="tag">🎯 Intent recognition</span><span class="tag">🎙 NLP / STT</span>
         </div>
       </div>
       <div class="coverage-item">
@@ -573,19 +741,40 @@
       <div class="section-note">The pipeline behind every benchmark and bug report.</div>
     </div>
     <div class="process-flow">
-      <div class="process-step"><span class="step-num mono">01</span><span class="step-label">Requirements</span></div>
-      <span class="process-arrow mono">→</span>
-      <div class="process-step"><span class="step-num mono">02</span><span class="step-label">Planning</span></div>
-      <span class="process-arrow mono">→</span>
-      <div class="process-step"><span class="step-num mono">03</span><span class="step-label">Quality Engineering</span><span class="step-sub">Manual + API + UI</span></div>
-      <span class="process-arrow mono">→</span>
-      <div class="process-step"><span class="step-num mono">04</span><span class="step-label">Test Automation</span></div>
-      <span class="process-arrow mono">→</span>
-      <div class="process-step"><span class="step-num mono">05</span><span class="step-label">AI Quality Validation</span><span class="step-sub">LLM, RAG, Prompt, Citation</span></div>
-      <span class="process-arrow mono">→</span>
-      <div class="process-step"><span class="step-num mono">06</span><span class="step-label">Quality Metrics</span></div>
-      <span class="process-arrow mono">→</span>
-      <div class="process-step"><span class="step-num mono">07</span><span class="step-label">Release Validation</span></div>
+      <div class="process-step">
+        <div class="step-top"><span class="step-icon" aria-hidden="true">📋</span><span class="step-num mono">01</span></div>
+        <span class="step-label">Requirements</span><span class="step-sub">Scope, acceptance criteria &amp; edge cases</span>
+      </div>
+      <span class="process-arrow mono" aria-hidden="true">→</span>
+      <div class="process-step">
+        <div class="step-top"><span class="step-icon" aria-hidden="true">🗺</span><span class="step-num mono">02</span></div>
+        <span class="step-label">Planning</span><span class="step-sub">Test strategy, risk areas, coverage plan</span>
+      </div>
+      <span class="process-arrow mono" aria-hidden="true">→</span>
+      <div class="process-step">
+        <div class="step-top"><span class="step-icon" aria-hidden="true">🔍</span><span class="step-num mono">03</span></div>
+        <span class="step-label">Quality Engineering</span><span class="step-sub">Manual + API + UI</span>
+      </div>
+      <span class="process-arrow mono" aria-hidden="true">→</span>
+      <div class="process-step">
+        <div class="step-top"><span class="step-icon" aria-hidden="true">🎭</span><span class="step-num mono">04</span></div>
+        <span class="step-label">Test Automation</span><span class="step-sub">Playwright, Selenium, hybrid POM</span>
+      </div>
+      <span class="process-arrow mono" aria-hidden="true">→</span>
+      <div class="process-step">
+        <div class="step-top"><span class="step-icon" aria-hidden="true">🧠</span><span class="step-num mono">05</span></div>
+        <span class="step-label">AI Quality Validation</span><span class="step-sub">LLM, RAG, Prompt, Citation</span>
+      </div>
+      <span class="process-arrow mono" aria-hidden="true">→</span>
+      <div class="process-step">
+        <div class="step-top"><span class="step-icon" aria-hidden="true">📊</span><span class="step-num mono">06</span></div>
+        <span class="step-label">Quality Metrics</span><span class="step-sub">Precision, recall, hallucination rate</span>
+      </div>
+      <span class="process-arrow mono" aria-hidden="true">→</span>
+      <div class="process-step">
+        <div class="step-top"><span class="step-icon" aria-hidden="true">🚀</span><span class="step-num mono">07</span></div>
+        <span class="step-label">Release Validation</span><span class="step-sub">Regression, UAT, sign-off</span>
+      </div>
     </div>
   </section>
 
@@ -604,10 +793,10 @@
         <ul>
           <li>Built <b>120+ benchmark ("golden") dataset questions</b> to evaluate AI agent accuracy, hallucination, and grounding.</li>
           <li>Score <b>precision, recall, and hallucination-rate</b> metrics via Promptfoo &amp; DeepEval across multiple insurance AI agents.</li>
-          <li>Test a <b>conversational AI / voice bot</b> on Microsoft Bot Framework — intent recognition, NLP, and speech-to-text.</li>
+          <li>Validate a <b>conversational AI / voice bot</b> on Microsoft Bot Framework — intent recognition, NLP, and speech-to-text.</li>
           <li>Built and maintain an <b>open-source AI test-generation agent</b> — test plans, scenarios, cases, and pass/fail dashboards.</li>
           <li>Extending that agent to execute against live applications and auto-generate structured bug reports.</li>
-          <li>Develop automated API tests (Postman, RestAssured) across Agile sprints; document QA findings for stakeholders.</li>
+          <li>Engineer automated API tests (Postman, RestAssured) across Agile sprints; document QA findings for stakeholders.</li>
         </ul>
       </div>
       <div class="entry">
@@ -619,8 +808,8 @@
           <li>Validated <b>1000+ cameras</b> for AI-powered monitoring — event detection across a microservices/Docker architecture.</li>
           <li>Designed <b>vision / OCR test assets</b> for computer-vision QA.</li>
           <li>Built and owned a <b>Selenium WebDriver automation framework</b> (hybrid POM + data-driven) from the ground up; working knowledge of Playwright.</li>
-          <li>Developed automated API tests (Postman, Rest Assured); performed backend <b>SQL validation</b> and root-cause analysis.</li>
-          <li>Executed functional, regression, integration, and UAT testing across release cycles.</li>
+          <li>Engineered automated API tests (Postman, Rest Assured); performed backend <b>SQL validation</b> and root-cause analysis.</li>
+          <li>Executed functional, regression, integration, and UAT testing across every release cycle.</li>
           <li>Mentored junior QA engineers on automation, testing best practices, and bug reporting.</li>
         </ul>
       </div>
@@ -646,29 +835,60 @@
           <span class="proj-name">QA-Agent</span>
           <span class="badge">Featured</span>
         </div>
-        <p class="proj-desc" style="margin-bottom:14px;">A personal, general-purpose QA copilot. Point it at a project's requirements (BRD/PRD/specs/API docs) and it generates traceable test cases and RTMs, tracks bug reports with optional Jira sync, builds AI/RAG benchmark datasets, runs real read-only database checks, real Playwright browser tests, and real API tests — auto-drafting defects from actual failures and verifying fixes by re-running them. Built on the Claude Agent SDK, through a chat UI backed by an autonomous agent rather than a fixed script pipeline.</p>
-        <div class="stack-tags">
-          <span class="stack-tag">TypeScript</span><span class="stack-tag">·</span>
-          <span class="stack-tag">Claude Agent SDK</span><span class="stack-tag">·</span>
-          <span class="stack-tag">Playwright</span>
+        <div class="case-grid two-col">
+          <div class="case-row">
+            <span class="case-label">Problem</span>
+            <span class="case-value">Manual QA teams lose hours writing test cases, tracking bugs, and re-testing fixes by hand.</span>
+          </div>
+          <div class="case-row">
+            <span class="case-label">Solution</span>
+            <span class="case-value">An autonomous QA copilot — built on the Claude Agent SDK — that turns specs into traceable test cases and runs real Playwright, API &amp; database checks.</span>
+          </div>
+          <div class="case-row">
+            <span class="case-label">My role</span>
+            <span class="case-value">Independent developer — architecture, agent design &amp; test-execution engine.</span>
+          </div>
+          <div class="case-row">
+            <span class="case-label">Stack</span>
+            <span class="case-value">TypeScript · Claude Agent SDK · Playwright</span>
+          </div>
         </div>
+        <ul class="achieve-list" style="margin-bottom:0;">
+          <li>Generates <b>traceable test cases &amp; RTMs</b> directly from BRD/PRD/API docs</li>
+          <li>Executes real Playwright, API, and read-only database checks — not mocked</li>
+          <li>Auto-drafts defects from actual failures and re-verifies fixes on re-run</li>
+          <li>Builds AI/RAG benchmark datasets with optional Jira sync</li>
+        </ul>
       </div>
       <div style="display:flex; align-items:flex-end;">
-        <a class="src-link" href="https://github.com/mohank1234/QA-Agent" target="_blank" rel="noopener">View source <span class="btn-arrow">→</span></a>
+        <a class="src-link" href="https://github.com/mohank1234/QA-Agent" target="_blank" rel="noopener">GitHub — View source <span class="btn-arrow">→</span></a>
       </div>
     </div>
 
     <div class="proj-grid">
       <div class="card">
-        <div class="proj-shot"><img src="project-promtfoo.png" alt="Promtfoo_Playwright evaluation pipeline: load dataset, login, create chat, ask agent, parse stream, grade answer, export report" loading="lazy"></div>
+        <div class="proj-shot"><img src="project-promtfoo.png" alt="Promtfoo_Playwright evaluation pipeline: load dataset, login, create chat, ask agent, parse stream, grade answer, export report" width="1600" height="350" loading="lazy"></div>
         <div class="proj-top">
           <span class="proj-name">Promtfoo_Playwright</span>
           <span class="badge">RAG eval</span>
         </div>
-        <p class="proj-desc">A Promptfoo-based benchmark framework for multi-agent RAG chat APIs: logs in, opens a chat, asks a benchmark question, parses the streamed response, and grades it semantically against an expected reference. Ships self-contained with a mock multi-agent API and a 120-question sample dataset.</p>
+        <div class="case-grid">
+          <div class="case-row">
+            <span class="case-label">Problem</span>
+            <span class="case-value">Multi-agent RAG chat APIs need repeatable, semantic grading — not just uptime checks.</span>
+          </div>
+          <div class="case-row">
+            <span class="case-label">Solution</span>
+            <span class="case-value">A Promptfoo-based pipeline that logs in, asks each benchmark question, parses the streamed response, and grades it semantically against a reference answer.</span>
+          </div>
+        </div>
+        <ul class="achieve-list">
+          <li>Ships with a mock multi-agent API + <b>120-question sample dataset</b></li>
+          <li>Automates login → ask → parse-stream → grade → export report end-to-end</li>
+        </ul>
         <div class="proj-foot">
           <div class="stack-tags"><span class="stack-tag">JavaScript</span><span class="stack-tag">·</span><span class="stack-tag">Promptfoo</span></div>
-          <a class="src-link" href="https://github.com/mohank1234/Promtfoo_Playwright" target="_blank" rel="noopener">Source <span class="btn-arrow">→</span></a>
+          <a class="src-link" href="https://github.com/mohank1234/Promtfoo_Playwright" target="_blank" rel="noopener">GitHub — Source <span class="btn-arrow">→</span></a>
         </div>
       </div>
       <div class="card">
@@ -676,10 +896,23 @@
           <span class="proj-name">API-Automator-XLS</span>
           <span class="badge">API testing</span>
         </div>
-        <p class="proj-desc">Excel-driven API test automation — write test cases in a spreadsheet, run them via Newman, and get HTML (htmlextra), Allure, and colour-coded Excel Pass/Fail reports out the other end.</p>
+        <div class="case-grid">
+          <div class="case-row">
+            <span class="case-label">Problem</span>
+            <span class="case-value">Non-technical stakeholders needed a way to author API tests without writing code.</span>
+          </div>
+          <div class="case-row">
+            <span class="case-label">Solution</span>
+            <span class="case-value">Excel-driven API automation — test cases live in a spreadsheet, execute via Newman, and produce HTML, Allure &amp; colour-coded Excel Pass/Fail reports.</span>
+          </div>
+        </div>
+        <ul class="achieve-list">
+          <li><b>Zero-code</b> test authoring for non-engineers</li>
+          <li>Three parallel report formats (HTML / Allure / Excel) from one run</li>
+        </ul>
         <div class="proj-foot">
           <div class="stack-tags"><span class="stack-tag">Node.js</span><span class="stack-tag">·</span><span class="stack-tag">Newman</span></div>
-          <a class="src-link" href="https://github.com/mohank1234/API-Automator-XLS" target="_blank" rel="noopener">Source <span class="btn-arrow">→</span></a>
+          <a class="src-link" href="https://github.com/mohank1234/API-Automator-XLS" target="_blank" rel="noopener">GitHub — Source <span class="btn-arrow">→</span></a>
         </div>
       </div>
     </div>
@@ -690,37 +923,59 @@
       <div><span class="eyebrow">06 — Achievements</span><h2 class="section-title">What I deliver</h2></div>
       <div class="section-note">Outcomes, not adjectives.</div>
     </div>
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <span class="kpi-icon" aria-hidden="true">🕒</span>
+        <span class="kpi-num mono"><span data-count-to="5">0</span>+</span>
+        <span class="kpi-label">Years of QA experience</span>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-icon" aria-hidden="true">📊</span>
+        <span class="kpi-num mono"><span data-count-to="120">0</span>+</span>
+        <span class="kpi-label">AI benchmark questions created</span>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-icon" aria-hidden="true">📷</span>
+        <span class="kpi-num mono"><span data-count-to="1000">0</span>+</span>
+        <span class="kpi-label">Computer-vision cameras validated</span>
+      </div>
+    </div>
     <ul class="impact-list">
-      <li>5+ years of QA experience</li>
-      <li>120+ AI benchmark questions created</li>
-      <li>1000+ computer-vision cameras validated</li>
       <li>AI/RAG evaluation using Promptfoo &amp; DeepEval</li>
       <li>API automation using Postman, Newman &amp; RestAssured</li>
       <li>Functional, regression, API &amp; AI testing</li>
     </ul>
   </section>
 
-  <footer id="contact" class="reveal">
-    <div class="section-head">
-      <div><span class="eyebrow">07 — Contact</span><h2 class="section-title">Get in touch</h2></div>
-    </div>
-    <p class="contact-tagline">Looking for Senior QA (Manual), Automation QA, or AI/LLM Testing opportunities. Let's connect.</p>
-    <div class="contact-grid">
-      <div class="contact-list">
-        <a href="Krishna_Mohan_B_Resume.pdf" id="resume-link-2" download="Krishna_Mohan_B_Resume.pdf">📄 <span class="k">Resume</span> Download PDF</a>
-        <a href="https://linkedin.com/in/krishna-batthini" target="_blank" rel="noopener">💼 <span class="k">LinkedIn</span> linkedin.com/in/krishna-batthini</a>
-        <a href="https://github.com/mohank1234" target="_blank" rel="noopener">🐙 <span class="k">GitHub</span> github.com/mohank1234</a>
-        <a href="mailto:krishnam.qaengineer@gmail.com">📧 <span class="k">Email</span> krishnam.qaengineer@gmail.com</a>
-        <a href="tel:+918897404807">📱 <span class="k">Phone</span> +91 88974 04807</a>
-      </div>
-      <div class="sign-off">
-        <div class="sign-name">© 2026 Krishna Mohan B</div>
-        <div style="margin-top:6px;">Senior QA Engineer • AI Test Engineer</div>
-      </div>
-    </div>
-  </footer>
+</main>
 
-</div>
+<footer id="contact" class="wrap reveal">
+  <div class="section-head">
+    <div><span class="eyebrow">07 — Contact</span><h2 class="section-title">Get in touch</h2></div>
+  </div>
+  <p class="contact-tagline">Looking for Senior QA (Manual), Automation QA, or AI/LLM Testing opportunities. Let's connect.</p>
+  <div class="contact-grid">
+    <div class="contact-list">
+      <a href="Krishna_Mohan_B_Resume.pdf" id="resume-link-2" download="Krishna_Mohan_B_Resume.pdf"><span aria-hidden="true">📄</span> <span class="k">Resume</span> Download PDF</a>
+      <a href="https://linkedin.com/in/krishna-batthini" target="_blank" rel="noopener"><span aria-hidden="true">💼</span> <span class="k">LinkedIn</span> linkedin.com/in/krishna-batthini</a>
+      <a href="https://github.com/mohank1234" target="_blank" rel="noopener"><span aria-hidden="true">🐙</span> <span class="k">GitHub</span> github.com/mohank1234</a>
+      <span style="display:inline-flex; align-items:center;">
+        <a href="mailto:krishnam.qaengineer@gmail.com"><span aria-hidden="true">📧</span> <span class="k">Email</span> krishnam.qaengineer@gmail.com</a>
+        <button type="button" class="btn" id="copyEmailBtn" style="padding:6px 12px; min-height:36px; margin-left:10px; font-size:0.74rem;" aria-label="Copy email address to clipboard" data-email="krishnam.qaengineer@gmail.com">Copy</button>
+        <span class="copy-feedback" id="copyFeedback" aria-live="polite"></span>
+      </span>
+      <a href="tel:+918897404807"><span aria-hidden="true">📱</span> <span class="k">Phone</span> +91 88974 04807</a>
+    </div>
+    <div class="sign-off">
+      <div class="sign-name">© 2026 Krishna Mohan B</div>
+      <div style="margin-top:6px;">Senior QA Engineer • AI Test Engineer</div>
+    </div>
+  </div>
+  <div class="back-to-top-row">
+    <a href="#top" class="btn back-to-top">↑ Back to top</a>
+  </div>
+</footer>
+
 <script>
 (function(){
   var toggle = document.getElementById('navToggle');
@@ -764,6 +1019,72 @@
     });
   }, { threshold: 0.12 });
   els.forEach(function(el){ io.observe(el); });
+})();
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var counters = document.querySelectorAll('[data-count-to]');
+  if (!counters.length) return;
+
+  function animate(el){
+    var target = parseInt(el.getAttribute('data-count-to'), 10);
+    if (reduce || !('IntersectionObserver' in window)) {
+      el.textContent = target;
+      return;
+    }
+    var start = null;
+    var duration = 900;
+    function step(ts){
+      if (!start) start = ts;
+      var progress = Math.min((ts - start) / duration, 1);
+      var eased = 1 - Math.pow(1 - progress, 3);
+      el.textContent = Math.round(target * eased);
+      if (progress < 1) {
+        window.requestAnimationFrame(step);
+      } else {
+        el.textContent = target;
+      }
+    }
+    window.requestAnimationFrame(step);
+  }
+
+  if (reduce || !('IntersectionObserver' in window)) {
+    counters.forEach(function(el){ el.textContent = el.getAttribute('data-count-to'); });
+    return;
+  }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if (entry.isIntersecting) {
+        animate(entry.target);
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.4 });
+  counters.forEach(function(el){ io.observe(el); });
+})();
+(function(){
+  var btn = document.getElementById('copyEmailBtn');
+  var feedback = document.getElementById('copyFeedback');
+  if (!btn) return;
+  btn.addEventListener('click', function(){
+    var email = btn.getAttribute('data-email');
+    function showFeedback(text){
+      feedback.textContent = text;
+      feedback.classList.add('show');
+      window.clearTimeout(showFeedback._t);
+      showFeedback._t = window.setTimeout(function(){
+        feedback.classList.remove('show');
+      }, 2200);
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(email).then(function(){
+        showFeedback('Copied!');
+      }).catch(function(){
+        showFeedback('Copy failed — email selected above');
+      });
+    } else {
+      showFeedback('Copy not supported — email selected above');
+    }
+  });
 })();
 </script>
 </body>
