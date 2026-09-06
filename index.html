@@ -1029,6 +1029,7 @@
     counters.forEach(function(el){ el.textContent = el.getAttribute('data-count-to'); });
     return;
   }
+  counters.forEach(function(el){ el.textContent = '0'; });
   var io = new IntersectionObserver(function(entries){
     entries.forEach(function(entry){
       if (entry.isIntersecting) {
