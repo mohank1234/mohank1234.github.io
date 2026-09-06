@@ -641,8 +641,8 @@
         </div>
         <div class="stat-strip">
           <div class="stat"><span class="stat-icon" aria-hidden="true">🕒</span><span class="num mono">05</span><span class="label">Years Experience</span></div>
-          <div class="stat"><span class="stat-icon" aria-hidden="true">📷</span><span class="num mono"><span data-count-to="1000">0</span>+</span><span class="label">Cameras Validated</span></div>
-          <div class="stat"><span class="stat-icon" aria-hidden="true">📊</span><span class="num mono"><span data-count-to="120">0</span>+</span><span class="label">AI Benchmark Cases</span></div>
+          <div class="stat"><span class="stat-icon" aria-hidden="true">📷</span><span class="num mono"><span data-count-to="1000">1000</span>+</span><span class="label">Cameras Validated</span></div>
+          <div class="stat"><span class="stat-icon" aria-hidden="true">📊</span><span class="num mono"><span data-count-to="120">120</span>+</span><span class="label">AI Benchmark Cases</span></div>
         </div>
       </div>
       <div class="hero-photo">
@@ -905,12 +905,12 @@
       </div>
       <div class="kpi-card">
         <span class="kpi-icon" aria-hidden="true">📊</span>
-        <span class="kpi-num mono"><span data-count-to="120">0</span>+</span>
+        <span class="kpi-num mono"><span data-count-to="120">120</span>+</span>
         <span class="kpi-label">AI benchmark cases created</span>
       </div>
       <div class="kpi-card">
         <span class="kpi-icon" aria-hidden="true">📷</span>
-        <span class="kpi-num mono"><span data-count-to="1000">0</span>+</span>
+        <span class="kpi-num mono"><span data-count-to="1000">1000</span>+</span>
         <span class="kpi-label">Computer-vision cameras validated</span>
       </div>
     </div>
@@ -941,7 +941,7 @@
       <a href="tel:+918897404807"><span aria-hidden="true">📱</span> <span class="k">Phone</span> +91 88974 04807</a>
     </div>
     <div class="sign-off">
-      <div class="sign-name">© 2026 Krishna Mohan B</div>
+      <div class="sign-name" id="copyrightLine">© 2026 Krishna Mohan B</div>
       <div style="margin-top:6px;">Senior QA Engineer • AI/LLM Test Engineer • Automation QA</div>
     </div>
   </div>
@@ -951,6 +951,10 @@
 </footer>
 
 <script>
+(function(){
+  var copyright = document.getElementById('copyrightLine');
+  if (copyright) copyright.textContent = '© ' + new Date().getFullYear() + ' Krishna Mohan B';
+})();
 (function(){
   var toggle = document.getElementById('navToggle');
   var nav = document.getElementById('siteNav');
@@ -1025,6 +1029,7 @@
     counters.forEach(function(el){ el.textContent = el.getAttribute('data-count-to'); });
     return;
   }
+  counters.forEach(function(el){ el.textContent = '0'; });
   var io = new IntersectionObserver(function(entries){
     entries.forEach(function(entry){
       if (entry.isIntersecting) {
