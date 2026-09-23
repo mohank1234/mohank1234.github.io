@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="How Personal Job Automation accesses, uses, stores, and shares Google account data.">
+  <link rel="canonical" href="https://mohank1234.github.io/personal-job-automation/privacy.html">
+  <link rel="stylesheet" href="style.css">
+  <title>Privacy policy · Personal Job Automation</title>
+</head>
+<body>
+  <a class="skip" href="#content">Skip to content</a>
+  <header><nav aria-label="Main navigation"><a href="./">App information</a><a href="privacy.html" aria-current="page">Privacy policy</a><a href="../">Owner's portfolio</a></nav></header>
+  <main id="content">
+    <p class="eyebrow">Personal Job Automation</p>
+    <h1>Privacy policy</h1>
+    <p class="muted">Effective 23 September 2026</p>
+    <p>Personal Job Automation is operated by Krishna Mohan B for personal job-search and profile-maintenance workflows. This policy covers the application’s authorized Google account connections and this information website.</p>
+    <section aria-labelledby="access">
+      <h2 id="access">Data accessed and how it is used</h2>
+      <ul>
+        <li><strong>Google account email address:</strong> used to confirm that the connected Gmail account is the intended account and to address the owner's notifications.</li>
+        <li><strong>Gmail messages and metadata:</strong> relevant messages may be read to retrieve fresh Naukri verification codes, detect replies in outreach threads, and check Sent mail to avoid duplicate notifications.</li>
+        <li><strong>Gmail drafts and outgoing messages:</strong> used to prepare job-search outreach and send the owner's profile-update notifications. Outreach and follow-up sending is controlled by the owner's configured workflows.</li>
+        <li><strong>Google Drive files, when authorized:</strong> selected job-search reports, spreadsheets, and supporting documents may be read or exported for reporting and outreach features. A separate reporting connection can create and update app-owned files using the Drive file permission.</li>
+        <li><strong>Job-search and execution records:</strong> profile values, job details, candidate information, workflow results, message identifiers, and diagnostic reports are processed to perform and troubleshoot the enabled features.</li>
+      </ul>
+      <p>The Google consent screen identifies the scopes requested by a connection. A granted scope may technically permit broader access than an individual feature uses; the application uses data for the enabled purposes described here.</p>
+    </section>
+    <section aria-labelledby="storage">
+      <h2 id="storage">Storage and retention</h2>
+      <p>OAuth credentials may be stored in files on the owner's computer and in GitHub Actions encrypted secrets. Naukri session cookies, attempted-slot records, and notification receipts are encrypted before being stored in the workflow cache. Access tokens and one-time codes are not intentionally printed in workflow logs.</p>
+      <p>Reports, drafts, messages, and workflow records may remain in the owner's local files, Google account, and GitHub workflow storage until removed by the owner or the service's retention settings. Naukri diagnostic artifacts are configured for three-day retention; downloaded copies are retained until deleted. Workflow logs and other job-search records have separate retention settings and are not covered by that three-day limit.</p>
+    </section>
+    <section aria-labelledby="sharing">
+      <h2 id="sharing">Services and sharing</h2>
+      <p>Google processes authentication, Gmail operations, and authorized Drive operations. GitHub provides workflow execution, encrypted secret storage, caches, logs, and diagnostic artifacts. Naukri receives the profile and login actions required for profile maintenance. The cloud timer receives a restricted GitHub dispatch credential; it does not receive the Gmail OAuth credential or Naukri password.</p>
+      <p>When outreach is enabled, configured recipients receive the messages and attachments sent to them. Job-search features may send selected job or candidate information to an owner-configured AI provider for analysis or drafting; the Naukri verification-code and status-email helpers do not call an AI provider. The application does not sell Google user data or use it for advertising. Access is limited to operating the authorized features and necessary troubleshooting by the owner.</p>
+      <p>Personal Job Automation's use and transfer of information received from Google APIs will adhere to the <a href="https://developers.google.com/terms/api-services-user-data-policy">Google API Services User Data Policy</a>, including its Limited Use requirements.</p>
+    </section>
+    <section aria-labelledby="control">
+      <h2 id="control">Revocation, deletion, and contact</h2>
+      <p>The owner can stop workflows and revoke the application through <a href="https://myaccount.google.com/connections">Google Account connections</a>. Revocation prevents future authorized Google access but does not automatically delete existing emails, drafts, reports, local token files, GitHub secrets, caches, or artifacts. Those copies can be removed through the relevant account, repository, or local storage controls.</p>
+      <p>For privacy questions or deletion requests, contact Krishna Mohan B at <a href="mailto:krishnam.qaengineer@gmail.com">krishnam.qaengineer@gmail.com</a>.</p>
+    </section>
+    <section aria-labelledby="website">
+      <h2 id="website">This website</h2>
+      <p>These app-information pages do not contain a sign-in form, analytics scripts, advertising, or application tracking cookies. GitHub Pages serves the site and may process ordinary request information, such as IP addresses, under <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">GitHub's privacy statement</a>.</p>
+      <p>This policy may be updated when the application's data practices change. The effective date above identifies this version.</p>
+    </section>
+  </main>
+  <footer><p><a href="./">Personal Job Automation</a> · <a href="mailto:krishnam.qaengineer@gmail.com">Contact the operator</a></p></footer>
+</body>
+</html>
